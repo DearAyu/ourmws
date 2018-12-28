@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        ul li{
+            list-style:none;
+            float:left;
+            font-size:30px;
+            margin:0 5px;
+            color:#f00;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<div style="border: 1px solid gainsboro;width: 600px;margin:0 auto;">
+    <div><img src="http://img.sccnn.com/bimg/337/34719.jpg" /></div>
+    <div style="border-top: 1px solid gainsboro;">
+        Hello [[${buyerName}]],
+        <br>
+        <br>
+        We noticed that your order was delivered recently. By now
+        <br> you’ve had a chance to try out your   <a style="text-decoration: none" target="_blank" href=${ASINUrl} th:href="${ASINUrl}" th:text="${ASIN}">${ASIN}</a>! I just wanted to
+        <br> make sure everything went perfectly with your purchase!
+        <br> If you have any problem, please reply to this message so I can make it right for you.
+        <br>
+        <br>
+        Order ID:[[${orderId}]]
+        <br>
+        Order Time:[[${orderTime}]]
+        <br>
+        <br>We value and appreciate very much your compliments, suggestions or
+        <br> complaints in order to improve our services. it would be amazing if you could
+        <br> leave us an honest review, Amazon customers rely heavily on reviews, yet so
+        <br> few Amazon customers ever take the time to write them! If you do have time,
+        <br> it really helps our small business. You can simply click the link below and leave
+        <br> us your valuable review :)
+        <br>
+        <br>
+        <a style="text-decoration: none" target="_blank" href=${feedbackUrl} th:href="${feedbackUrl}" th:text="${accountName}"></a>
+        <br>
+        <div>
+            <div style="float: left;font-size:30px;">[[${ASIN}]]:</div>
+            <div>
+                <a href="${reviewUrl}" th:href="${reviewUrl}" target="_blank">
+                    <ul>
+                        <li>&#9733;</li>
+                        <li>&#9733;</li>
+                        <li>&#9733;</li>
+                        <li>&#9733;</li>
+                        <li>&#9733;</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <p style="color: #3e5ba2;"> All of our promotions and upcoming products will be announced immediately on i*n*s*t*a*g*r*a*m.<br> </p>
+        <p style="color: #3e5ba2;"> Search [[${accountName}]] to follow our i*n*s*t*a*g*r*a*m.<br> </p>
+        <p> </p>
+        Thank you again for your understanding and continuous support.
+        <br>
+        <br>
+        Have a great day!
+        <br>
+        <br>
+        Support Team
+    </div>
+</div>
+</body>
+</html>

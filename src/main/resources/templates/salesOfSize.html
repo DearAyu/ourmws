@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>金麻雀电子有限公司操作系统</title>
+	<!-- Bootstrap核心CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+	<!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
+	<!-- 自定义 CSS -->
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+	<!-- Morris Charts CSS -->
+    <link href="../css/morris.css" rel="stylesheet">
+	<!-- 自定义 Fonts -->
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Echarts核心JS -->
+    <script type="text/javascript" src="../js/echarts/echarts.js" ></script>
+    <!-- Echarts主题JS -->
+    <script type="text/javascript" src="../js/echarts/Theme/purple-passion.js" ></script>
+     <!-- jQuery -->
+    <style>
+        td,th{
+            text-align: center;
+        }
+    </style>
+    <script src="../js/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">金麻雀电子有限公司操作系统</a>
+            </div>
+            <!-- 头部导航 -->
+			<ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <!--<ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>约翰史密斯</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                                </div>
+                                <div>LeRM IpSouthDoor坐在一起，奉献Eclipse EelIT。埃伦菲德…</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>约翰史密斯</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                                </div>
+                                <div>LeRM IpSouthDoor坐在一起，奉献Eclipse EelIT。埃伦菲德…</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>约翰史密斯</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                                </div>
+                                <div>LeRM IpSouthDoor坐在一起，奉献Eclipse EelIT。埃伦菲德…</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>读取所有消息</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>-->
+                    <!-- /下拉消息 -->
+                </li>
+                <!-- /下拉 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 1</strong>
+                                        <span class="pull-right text-muted">40% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% 完成度 (成功)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 2</strong>
+                                        <span class="pull-right text-muted">20% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% 完成度</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 3</strong>
+                                        <span class="pull-right text-muted">60% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% 完成度 (警告)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 4</strong>
+                                        <span class="pull-right text-muted">80% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% 完成度 (危险)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有任务</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.下拉任务 -->
+                </li>
+                <!-- /.下拉 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <!--<ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> 新评论
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 新用户
+                                    <span class="pull-right text-muted small">12 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> 消息发送
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> 新任务
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> 服务器重新启动
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有警报</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>-->
+                    <!-- /.下拉警报 -->
+                </li>
+                <!-- /.下拉 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> [[${session.accountName}]]<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户资料</a>
+                        </li>
+                        <li><a href="changeAccount"><i class="fa fa-gear fa-fw"></i> 切换账号</a>
+                        </li>
+                        <!--<li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        </li>-->
+                    </ul>
+                    <!-- /.下拉用户-->
+                </li>
+                <!-- /.下拉 -->
+            </ul>
+            <!-- /.导航链接 -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /输入框组 -->
+                        </li>
+                        <li>
+                            <a href="home"><i class="fa fa-dashboard fa-fw"></i> 主页</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 备货参考信息<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="salesOfSku">各SKU销售详情</a>
+                                </li>
+                                <li>
+                                    <a href="salesOfSize">各尺寸销售详情表</a>
+                                </li>
+                                <li>
+                                    <a href="salesOfColor">各颜色销售详情</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <!--<li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> 表格</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> 表格</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI 组件<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                        </li>-->
+                        <!--<li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> 多级下拉<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">二级项目</a>
+                                </li>
+                                <li>
+                                    <a href="#">二级项目</a>
+                                </li>
+                                <li>
+                                    <a href="#">三级 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>-->
+                        <!--<li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 样本页面<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="blank.html">空白页面</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">登录页面</a>
+                                </li>
+                            </ul>
+                        </li>-->
+                    </ul>
+                </div>
+                <!-- /.侧栏折叠 -->
+            </div>
+            <!-- /.导航栏静态侧 -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">参考信息</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 各尺寸销售详情
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        操作
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="download/salesOfSize">下载</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table class="table table-hover table-bordered table-condensed">
+                            	<thead>
+	                            	<tr>
+	                            		<th>尺寸</th>
+	                            		<th>近30天销量</th>
+	                            		<th>近90天销量</th>
+	                            		<th>近180天销量</th>
+	                            		<th>近1年销量</th>
+	                            	</tr>
+                            	</thead>
+                            	<tbody>
+	                            	<tr th:each="s:${sales}">
+	                            		<td th:text="${s.size}">DASDQW</td>
+	                            		<td th:text="${s.monthNum}">39</td>
+	                            		<td th:text="${s.seasonNum}">93</td>
+	                            		<td th:text="${s.halfYearNum}">184</td>
+	                            		<td th:text="${s.YearNum}">352</td>
+	                            	</tr>
+                            	</tbody>
+                            </table>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- Bootstrap核心JS -->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Metis菜单插件JS -->
+    <script src="../js/metisMenu.min.js"></script>
+
+    <!-- 自定义主题JS -->
+    <script src="../js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

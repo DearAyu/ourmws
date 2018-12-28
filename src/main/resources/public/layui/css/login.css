@@ -1,0 +1,12 @@
+form{
+	border: 1px solid deepskyblue;
+	margin-top: 100px;
+}
+form > #formTitle{
+	height: 80px;
+	border-bottom: 1px solid gainsboro;
+	font: 30px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+	line-height: 80px;
+	text-align: center;
+	font-weight: bold;
+}

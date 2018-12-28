@@ -1,0 +1,44 @@
+.layui-body > .layui-row{
+	margin-top: 10px;
+	width: 96%;
+	margin-left: 2%;
+}
+#headCard  .layui-card{
+	border: 1px solid gainsboro;
+	height: 160px;
+}
+#headCard  .layui-card .layui-card-header{
+	height: 120px;
+}
+#headCard  .layui-card .layui-card-header > div{
+	margin-top: 20px;
+	
+}
+#headCard  .layui-card .layui-card-header > div > div{
+	text-align: center;
+}
+#headCard  .layui-card .layui-card-header > div > div:first-child{
+	font-size: 30px;	
+}
+
+#headCard  .layui-card .layui-card-body{
+	color: gray;
+}
+#headCard  .layui-card .layui-card-body i{
+	font-size: 14px;
+}
+#MainContent{
+	margin-top: 0px;
+}
+#MainContent  .layui-card{
+	border: 1px solid gainsboro;
+}
+#MainContent  .layui-card > .layui-card-header{
+	height: 30px;
+	background-color: #f2f2f2;
+	border-bottom: 1px solid gainsboro;
+	line-height: 30px;
+}
+#MainContent  .layui-card > .layui-card-header{
+	
+}

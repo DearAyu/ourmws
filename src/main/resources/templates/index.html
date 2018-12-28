@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>金麻雀电子有限公司操作系统</title>
+	<!-- Bootstrap核心CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Layui核心CSS -->
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+	<!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
+	<!-- 自定义 CSS -->
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+	<!-- Morris Charts CSS -->
+    <link href="../css/morris.css" rel="stylesheet">
+	<!-- 自定义 Fonts -->
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Echarts核心JS -->
+    <script type="text/javascript" src="../js/echarts/echarts.js" ></script>
+    <!-- Echarts主题JS -->
+    <script type="text/javascript" src="../js/echarts/Theme/purple-passion.js" ></script>
+     <!-- jQuery -->
+    <style>
+        .huge{
+            text-decoration: line-through;
+        }
+        td,th{
+             text-align: center;
+        }
+    </style>
+    <script src="../js/jquery.min.js"></script>
+	<script>
+    	$(function(){
+    		$.ajax({
+            	type:"get",
+            	url:"http://47.110.139.219:80/perSalesMsg",
+            	success:function(data){
+            		var month=[];
+            		var totalOrderNum=[];
+            		var totalPriceNum=[];
+            		var totalGoodsNum=[];
+                    var myDate = new Date();
+                    for(var a=myDate.getDate();a<data.extend.analysis.length;a++){
+            			month.push(data.extend.analysis[a].month+"日");
+            			totalOrderNum.push(data.extend.analysis[a].totalOrdersNum);
+            			totalPriceNum.push(data.extend.analysis[a].totalPriceNum);
+            			totalGoodsNum.push(data.extend.analysis[a].totalGoodsNum);
+            		}
+                    for(var a=0;a<myDate.getDate();a++){
+                        month.push(data.extend.analysis[a].month+"日");
+                        totalOrderNum.push(data.extend.analysis[a].totalOrdersNum);
+                        totalPriceNum.push(data.extend.analysis[a].totalPriceNum);
+                        totalGoodsNum.push(data.extend.analysis[a].totalGoodsNum);
+                    }
+            		myChart.setOption({
+            			xAxis: {
+                            data: month
+                        },
+                        series: [
+                        {
+                        	data:totalOrderNum
+                        },
+                        {
+                        	data:totalPriceNum
+                        },
+                        {
+                        	data:totalGoodsNum
+                        }
+                        ]
+                        
+					});
+            	},
+            	error:function(e){
+            		//alert("error");
+            	}
+           });
+           $.ajax({
+            	type:"get",
+            	url:"http://47.110.139.219:80/perSalesShare",
+            	success:function(data){
+            		var inch=[];
+            		var totalOrderNum=[];
+            		var totalPriceNum=[];
+            		var totalGoodsNum=[];
+            		for(var a=0;a<data.extend.share.length;a++){
+            			inch.push(data.extend.share[a].inch);
+            			totalOrderNum.push(data.extend.share[a].totalOrdersNum);
+            			totalPriceNum.push(data.extend.share[a].totalPriceNum);
+            			totalGoodsNum.push(data.extend.share[a].totalGoodsNum);
+            		}
+            		myChart1.setOption({
+            			legend: {
+                            data: inch
+                        },
+                        series: [
+                        {
+                        	data:[
+				                {value:totalGoodsNum[0], name:inch[0]},
+				                {value:totalGoodsNum[1], name:inch[1]},
+				                {value:totalGoodsNum[2], name:inch[2]},
+				                {value:totalGoodsNum[3], name:inch[3]},
+				                {value:totalGoodsNum[4], name:inch[4]}
+				            ],
+					    }
+                        ]
+                    });
+            	},
+            	error:function(e){
+            		//alert("error");
+            	}
+            	
+            })
+    	})
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+		<!-- 导航栏 -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">金麻雀电子有限公司操作系统 V1.0</a>
+            </div>
+            <!-- 头部导航 -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <!--<ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>约翰史密斯</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                                </div>
+                                <div>LeRM IpSouthDoor坐在一起，奉献Eclipse EelIT。埃伦菲德…</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>约翰史密斯</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                                </div>
+                                <div>LeRM IpSouthDoor坐在一起，奉献Eclipse EelIT。埃伦菲德…</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>约翰史密斯</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                                </div>
+                                <div>LeRM IpSouthDoor坐在一起，奉献Eclipse EelIT。埃伦菲德…</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>读取所有消息</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>-->
+                    <!-- /下拉消息 -->
+                </li>
+                <!-- /下拉 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 1</strong>
+                                        <span class="pull-right text-muted">40% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% 完成度 (成功)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 2</strong>
+                                        <span class="pull-right text-muted">20% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% 完成度</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 3</strong>
+                                        <span class="pull-right text-muted">60% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% 完成度 (警告)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 4</strong>
+                                        <span class="pull-right text-muted">80% 完成度</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% 完成度 (危险)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有任务</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.下拉任务 -->
+                </li>
+                <!-- /.下拉 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <!--<ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> 新评论
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 新用户
+                                    <span class="pull-right text-muted small">12 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> 消息发送
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> 新任务
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> 服务器重新启动
+                                    <span class="pull-right text-muted small">4 分钟以前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有警报</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>-->
+                    <!-- /.下拉警报 -->
+                </li>
+                <!-- /.下拉 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>[[${session.accountName}]] <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户资料</a>
+                        </li>
+                        <li><a href="changeAccount"><i class="fa fa-gear fa-fw"></i> 切换账号</a>
+                        </li>
+                        <!--<li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        </li>-->
+                    </ul>
+                    <!-- /.下拉用户-->
+                </li>
+                <!-- /.下拉 -->
+            </ul>
+            <!-- /.导航链接 -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /输入框组 -->
+                        </li>
+                        <li>
+                            <a href="home"><i class="fa fa-dashboard fa-fw"></i> 主页</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 备货参考信息<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="salesOfSku">各SKU销售详情</a>
+                                </li>
+                                <li>
+                                    <a href="salesOfSize">各尺寸销售详情表</a>
+                                </li>
+                                <li>
+                                    <a href="salesOfColor">各颜色销售详情</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <!--<li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> 表格</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> 表格</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI 组件<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                        </li>-->
+                        <!--<li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> 多级下拉<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">二级项目</a>
+                                </li>
+                                <li>
+                                    <a href="#">二级项目</a>
+                                </li>
+                                <li>
+                                    <a href="#">三级 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">三级项目</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>-->
+                        <!--<li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 样本页面<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="blank.html">空白页面</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">登录页面</a>
+                                </li>
+                            </ul>
+                        </li>-->
+                    </ul>
+                </div>
+                <!-- /.侧栏折叠 -->
+            </div>
+            <!-- /.导航栏静态侧 -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">本月销售概况</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-dollar fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">2612</div>
+                                    <div>本月销售额</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细信息</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-cube fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">12</div>
+                                    <div>本月售出商品数</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细信息</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">124</div>
+                                    <div>本月订单数</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细信息</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-frown-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13</div>
+                                    <div>本月退货量</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细信息</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 近30天销量
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        	操作
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="javascript:void(0)">#</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" id="thisMonth" style="height:600px;">
+                            
+                        </div>
+                      	<!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 库存
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       	操作
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="/download/inventoryMsg">下载</a>
+                                        </li>
+                                       <!-- <li><a href="#">其他操作</a>
+                                        </li>
+                                        <li><a href="#">这里还有别的</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">分离环节</a>
+                                        </li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                       <!-- <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ASIN</th>
+                                                    <th>商品名</th>
+                                                    <th>库存数</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="i:${inventory}">
+                                                    <th th:text="${i.ASIN}">ASIN</th>
+                                                    <th th:text="${i.title}">商品名</th>
+                                                    <th th:text="${i.inventoryNum}">库存数</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                                        <table class="layui-hide" id="test" lay-filter="test"></table>
+
+                                        <script type="text/html" id="toolbarDemo">
+                                            <div class="layui-btn-container">
+                                                <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+                                                <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+                                                <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+                                            </div>
+                                        </script>
+
+                                        <script type="text/html" id="barDemo">
+                                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                        </script>
+                                    </div>
+                                    <!-- /.表响应 -->
+                                </div>
+                                <!-- /.col-lg-4 (nested) -->
+                                <div class="col-lg-8">
+                                    <div id="morris-bar-chart"></div>
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-clock-o fa-fw"></i> 公司目标路线(内容建设中~~~)
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="timeline">
+                                <li>
+                                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">袁黎</h4>
+                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 几小时前</small>
+                                            </p>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>今天的任务：任务一XXX   任务二：XXX</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-inverted">
+                                    <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">反馈</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>胡：任务完成</p>
+                                            <p>谢：任务完成</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">XXX</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-inverted">
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">XXX</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="timeline-badge info"><i class="fa fa-save"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">XXX</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                                            <hr>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="fa fa-gear"></i> <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">操作</a>
+                                                    </li>
+                                                    <li><a href="#">其他操作</a>
+                                                    </li>
+                                                    <li><a href="#">这里还有别的</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">分离环节</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">XXX</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-inverted">
+                                    <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">XXX</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> 通知面板（内容建设中~~~）
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-comment fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-twitter fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-envelope fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-tasks fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-upload fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-bolt fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-warning fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-shopping-cart fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-money fa-fw"></i>
+                                    <span class="pull-right text-muted small"><em></em>
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- /.list-group -->
+                            <a href="#" class="btn btn-default btn-block">查看所有</a>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 最近30天每个尺寸售出的数量占比
+                        </div>
+                        <div class="panel-body" >
+                        	<div id="salesShare" style="height: 300px;"></div>
+                            <div><a href="#" class="btn btn-default btn-block">查看详细信息</a></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-comments fa-fw"></i> 聊天窗口（内容建设中~~~）
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-chevron-down"></i>
+                                </button>
+                                <ul class="dropdown-menu slidedown">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-refresh fa-fw"></i> 刷新
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-check-circle fa-fw"></i> 在线
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-times fa-fw"></i> 忙碌
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-clock-o fa-fw"></i> 离开
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-sign-out fa-fw"></i> 退出
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="chat">
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">Jack Ma</strong>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 12 分钟以前
+                                            </small>
+                                        </div>
+                                        <p>
+
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <small class=" text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 13 分钟以前</small>
+                                            <strong class="pull-right primary-font">RiCheng Hu</strong>
+                                        </div>
+                                        <p>
+
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">Handsome Yuan</strong>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 14 分钟以前</small>
+                                        </div>
+                                        <p>
+
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <small class=" text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 15 分钟以前</small>
+                                            <strong class="pull-right primary-font">Lee</strong>
+                                        </div>
+                                        <p>
+
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="在这里输入您的消息…" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        	发送
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /.面板底部 -->
+                    </div>
+                    <!-- /.面板 .聊天面板 -->
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#页面包装器 -->
+
+    </div>
+    <!-- /#包装器 -->
+    <!-- Bootstrap核心JS -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Layui核心JS -->
+    <script src="../layui/layui.js" charset="utf-8"></script>
+    <!-- Metis菜单插件JS -->
+    <script src="../js/metisMenu.min.js"></script>
+
+    <!-- 自定义主题JS -->
+    <script src="../js/sb-admin-2.js"></script>
+    <script>
+        layui.use('table', function(){
+            var table = layui.table;
+
+            table.render({
+                elem: '#test'
+                ,url:'http://localhost:8080/inventory'
+                ,toolbar: '#toolbarDemo'
+                ,title: '用户数据表'
+                ,cols: [
+                    [
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field:'sellerSKU', title:'sellerSKU', fixed: 'left', unresize: true}
+                    ,{field:'asin', title:'ASIN', edit: 'text'}
+                    ,{field:'title', title:'商品名',edit: 'text', sort: true}
+                    ,{field:'inventoryNum', title:'库存数',edit: 'text', sort: true}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
+                ]
+                ]
+                ,page: true
+            });
+
+            //头工具栏事件
+            table.on('toolbar(test)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch(obj.event){
+                    case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                        break;
+                    case 'getCheckLength':
+                        var data = checkStatus.data;
+                        layer.msg('选中了：'+ data.length + ' 个');
+                        break;
+                    case 'isAll':
+                        layer.msg(checkStatus.isAll ? '全选': '未全选');
+                        break;
+                };
+            });
+
+            //监听行工具事件
+            table.on('tool(test)', function(obj){
+                var data = obj.data;
+                //console.log(obj)
+                if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'edit'){
+                    layer.prompt({
+                        formType: 2
+                        ,value: data.email
+                    }, function(value, index){
+                        obj.update({
+                            email: value
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+        });
+    </script>
+	<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('thisMonth'),'purple-passion');
+        var myChart1 = echarts.init(document.getElementById('salesShare'));
+        // 指定图表的配置项和数据
+        option = {
+		    title: {
+		        subtext: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['日订单量','日销售额','日商品销售量']
+		    },
+		    toolbox: {
+		        show: true,
+		        feature: {
+		            dataZoom: {
+		                yAxisIndex: 'none'
+		            },
+		            /*dataView: {readOnly: true},*/
+		            magicType: {type: ['bar']},
+		            restore: {},
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis:  {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: [],
+		    },
+		    yAxis: {
+		        type: 'value',
+		    },
+		    series: [
+		        {
+		            name:'日订单量',
+		            type:'line',
+		            smooth: true,
+		            data:[],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
+		                ]
+		            }
+		        },
+		        {
+		            name:'日销售额',
+		            type:'line',
+		            smooth: true,
+		            data:[],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
+		                ]
+		            }
+		        },
+		        {
+		            name:'日商品销售量',
+		            type:'line',
+		            smooth: true,
+		            data:[],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
+		                ]
+		            }
+		        },
+		    ]
+		};
+		
+		option1 = {
+		    title : {
+		        x:'center'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        left: 'left',
+		        data: []
+		    },
+		    series : [
+		        {
+		            name: '售出数量比例',
+		            type: 'pie',
+		            radius : '55%',
+		            center: ['50%', '60%'],
+		            data:[],
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+		myChart1.setOption(option1);
+    </script>
+</body>
+
+</html>

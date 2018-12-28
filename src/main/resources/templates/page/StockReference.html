@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>金麻雀电子商务公司</title>
+	<link rel="stylesheet" href="../layui/css/layui.css" />
+	<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../layui/jquery.min.js" ></script>
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  	<div class="layui-header layui-bg-blue">
+	    	<div class="layui-logo" style="color: white;">金麻雀电子商务公司 v2.0</div>
+	    	<ul class="layui-nav layui-layout-left">
+	      		<li class="layui-nav-item layadmin-flexible" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+	          			<i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item layui-hide-xs" lay-unselect="">
+	        		<a href="javascript:;" target="_blank" title="前台">
+	          			<i class="layui-icon layui-icon-website"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="refresh" title="刷新">
+	          			<i class="layui-icon layui-icon-refresh-3"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item layui-hide-xs" lay-unselect="">
+	        		<input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search/keywords="> 
+	      		</li>
+	    		<span class="layui-nav-bar" style="left: 288px; top: 48px; width: 0px; opacity: 0;"></span>
+	    	</ul>
+	    	<ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+  		  		<li class="layui-nav-item" lay-unselect="">
+	        		<a lay-href="app/message/" layadmin-event="message">
+	          			<i class="layui-icon layui-icon-notice"></i>
+	          			<!-- 如果有新消息，则显示小圆点 -->
+	          			<script type="text/html" template="" lay-url="./json/message/new.js">
+	          				{{# if(d.data.newmsg){ }} 
+	            			<span class="layui-badge-dot"></span>
+	          				{{# } }}
+	          			</script>    
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="theme">
+	          			<i class="layui-icon layui-icon-theme"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="note">
+	         			<i class="layui-icon layui-icon-note"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="fullscreen">
+	          			<i class="layui-icon layui-icon-screen-restore"></i>
+	        		</a>
+	      		</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						[[${session.accountName}]]
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="changeAccount">切换账号</a></dd>
+					</dl>
+				</li>
+	    	</ul>
+	  	</div>
+	  
+	  	<div class="layui-side layui-bg-cyan layui-side-menu" style="width: 200px;">
+	    	<div class="layui-side-scroll">
+	      		<ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" >
+			        <li class="layui-nav-item"><a href="Home"><i class="layui-icon layui-icon-home"></i>&nbsp;&nbsp;主页</a></li>
+			        <li class="layui-nav-item  layui-nav-itemed">
+			        	<a href="#">
+			        		<i class="fa fa-bar-chart-o fa-fw"></i> 备货参考信息
+			        	</a>
+			        	<dl class="layui-nav-child" id="tabItem">
+				            <dd><a href="javascript:;">各SKU销售详情表</a></dd>
+				            <dd><a href="javascript:;">各尺寸销售详情表</a></dd>
+				            <dd><a href="javascript:;">各颜色销售详情表</a></dd>
+          				</dl>
+			        </li>
+	      		</ul>
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="layui-body" >  		
+	  		<div class="layui-tab" lay-filter="StockReference" lay-allowclose="true">
+			  	<ul class="layui-tab-title">
+			    	<li class="layui-this" lay-id="skuTab">各SKU销售详情表</li>
+			  	</ul>
+			  	<div class="layui-tab-content">
+				    <div class="layui-tab-item layui-show" id="skuTabContent">
+				    	<table class="layui-hide" id="saleOfSKU" lay-filter="saleOfSKU"></table>
+				    </div>
+			  	</div>
+			</div>
+			<div class="layui-tab-item" style="display: none;" id="skuTabContent">
+				<table class="layui-hide" id="saleOfSKU" lay-filter="saleOfSKU"></table>
+			</div>
+			<div class="layui-tab-item" style="display: none;" id="sizeTabContent">
+				<table class="layui-hide" id="saleOfSize" lay-filter="saleOfSize"></table>
+			</div>
+			<div class="layui-tab-item" style="display: none;" id="colorTabContent">
+				<table class="layui-hide" id="saleOfColor" lay-filter="saleOfColor"></table>
+			</div>
+			
+	  	</div>
+	  	<div class="layui-footer">
+			© 金麻雀.com
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../layui/layui.js" ></script>
+<script>
+	layui.use(['element','table'],function(){
+		var element = layui.element
+		,table = layui.table;
+
+		  
+		$('#tabItem a').on('click', function(){
+		    var othis = $(this), name = othis.text();
+		    //新增一个Tab项
+		    var tabName=[];
+		    $.each($(".layui-tab-title li"), function() {
+		    	tabName.push($(this).text().substring(0,$(this).text().length-1));
+		    });
+		    var tabId;
+		    if(name=="各SKU销售详情表"){
+		    	tabId="skuTab";
+		    }else if(name=="各尺寸销售详情表"){
+		    	tabId="sizeTab";
+		    }else{
+		    	tabId="colorTab";
+		    }
+		    var tabContent="#"+tabId+"Content";
+		    if(tabName.indexOf(name)==-1){
+			    element.tabAdd('StockReference', {
+			    	title:name
+			        ,content: $(tabContent).html()
+			        ,id: tabId
+			    });
+			    element.tabChange('StockReference', tabId);
+		    }else{
+		    	element.tabChange('StockReference', tabId);
+		    }
+		});
+		
+		table.render({
+			 elem: '#saleOfSKU'
+		    ,url:'http://47.110.139.219:80/salesOfSku'
+		    ,toolbar: '#toolbarSKU'
+    		,title: 'SKU销售情况表'
+		    ,cols: [
+		        [
+		      {field:'sellerSKU', title: 'SKU',align:"center",unresize: true}
+		      ,{field:'asin', title: 'ASIN',align:"center", sort: true}
+		      ,{field:'title', title: '商品名',align:"center", sort: true,width:'40%'}
+		      ,{field:'monthNum', title: '近30天销量',align:"center", sort: true}
+		      ,{field:'seasonNum', title: '近90天销量',align:"center", sort: true}
+		      ,{field:'halfYearNum', title: '近180天销量', sort: true,align:"center"}
+		      ,{field:'yearNum', title: '近360天销量', sort: true,align:"center"}
+		    ]
+			]
+		    ,page: true
+		    ,limit:16
+		});
+		
+		table.render({
+			 elem: '#saleOfColor'
+		    ,url:'http://47.110.139.219:80/salesOfColor'
+		    ,toolbar: '#toolbarColor'
+    		,title: '颜色销售情况表'
+		    ,cols: [
+		        [
+		      {field:'color', title: '颜色',align:"center",unresize: true}
+		      ,{field:'monthNum', title: '近30天销量',align:"center", sort: true}
+		      ,{field:'seasonNum', title: '近90天销量',align:"center", sort: true}
+		      ,{field:'halfYearNum', title: '近180天销量', sort: true,align:"center"}
+		      ,{field:'yearNum', title: '近360天销量', sort: true,align:"center"}
+		      ]
+			]
+		    ,limit:30
+		});
+	
+		table.render({
+			 elem: '#saleOfSize'
+		    ,url:'http://47.110.139.219:80/salesOfSize'
+		    ,toolbar: '#toolbarSize'
+    		,title: '尺寸销售情况表'
+		    ,cols: [
+		        [
+		      {field:'size', title: '尺寸',align:"center",unresize: true}
+		      ,{field:'monthNum', title: '近30天销量',align:"center", sort: true}
+		      ,{field:'seasonNum', title: '近90天销量',align:"center", sort: true}
+		      ,{field:'halfYearNum', title: '近180天销量', sort: true,align:"center"}
+		      ,{field:'yearNum', title: '近360天销量', sort: true,align:"center"}
+		    ]
+			]
+		});
+	});
+</script>
+</html>

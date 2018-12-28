@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>金麻雀电子商务公司</title>
+	<link rel="stylesheet" href="../layui/css/layui.css" />
+	<link rel="stylesheet" href="../css/home.css" />
+	<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../layui/jquery.min.js" ></script>
+	<script type="text/javascript" src="../echarts/echarts.js" ></script>
+	<script>
+    	$(function(){
+    		$.ajax({
+            	type:"get",
+            	url:"http://47.110.139.219/perSalesMsg",
+            	success:function(data){
+            		var month=[];
+            		var totalOrderNum=[];
+            		var totalPriceNum=[];
+            		var totalGoodsNum=[];
+                    var myDate = new Date();
+                    for(var a=myDate.getDate();a<data.extend.analysis.length;a++){
+            			month.push(data.extend.analysis[a].month+"日");
+            			totalOrderNum.push(data.extend.analysis[a].totalOrdersNum);
+            			totalPriceNum.push(data.extend.analysis[a].totalPriceNum);
+            			totalGoodsNum.push(data.extend.analysis[a].totalGoodsNum);
+            		}
+                    for(var a=0;a<myDate.getDate();a++){
+                        month.push(data.extend.analysis[a].month+"日");
+                        totalOrderNum.push(data.extend.analysis[a].totalOrdersNum);
+                        totalPriceNum.push(data.extend.analysis[a].totalPriceNum);
+                        totalGoodsNum.push(data.extend.analysis[a].totalGoodsNum);
+                    }
+            		myChart.setOption({
+            			xAxis: {
+                            data: month
+                        },
+                        series: [
+                        {
+                        	data:totalOrderNum
+                        },
+                        {
+                        	data:totalPriceNum
+                        },
+                        {
+                        	data:totalGoodsNum
+                        }
+                        ]
+                        
+					});
+            	},
+            	error:function(e){
+            		//alert("error");
+            	}
+           });
+           $.ajax({
+            	type:"get",
+            	url:"http://47.110.139.219/perSalesShare",
+            	success:function(data){
+            		var inch=[];
+            		var totalOrderNum=[];
+            		var totalPriceNum=[];
+            		var totalGoodsNum=[];
+            		for(var a=0;a<data.extend.share.length;a++){
+            			inch.push(data.extend.share[a].inch);
+            			totalOrderNum.push(data.extend.share[a].totalOrdersNum);
+            			totalPriceNum.push(data.extend.share[a].totalPriceNum);
+            			totalGoodsNum.push(data.extend.share[a].totalGoodsNum);
+            		}
+            		myChart1.setOption({
+            			legend: {
+                            data: inch
+                        },
+                        series: [
+                        {
+                        	data:[
+				                {value:totalGoodsNum[0], name:inch[0]},
+				                {value:totalGoodsNum[1], name:inch[1]},
+				                {value:totalGoodsNum[2], name:inch[2]},
+				                {value:totalGoodsNum[3], name:inch[3]},
+				                {value:totalGoodsNum[4], name:inch[4]}
+				            ],
+					    }
+                        ]
+                    });
+            	},
+            	error:function(e){
+            		//alert("error");
+            	}
+            	
+            })
+    	})
+    </script>
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  	<div class="layui-header layui-bg-blue">
+	    	<div class="layui-logo" style="color: white;">金麻雀电子商务公司 v2.0</div>
+	    	<ul class="layui-nav layui-layout-left">
+	      		<li class="layui-nav-item layadmin-flexible" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+	          			<i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item layui-hide-xs" lay-unselect="">
+	        		<a href="avascript:;" target="_blank" title="前台">
+	          			<i class="layui-icon layui-icon-website"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="refresh" title="刷新">
+	          			<i class="layui-icon layui-icon-refresh-3"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item layui-hide-xs" lay-unselect="">
+	        		<input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search/keywords="> 
+	      		</li>
+	    		<span class="layui-nav-bar" style="left: 288px; top: 48px; width: 0px; opacity: 0;"></span>
+	    	</ul>
+	    	<ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+  		  		<li class="layui-nav-item" lay-unselect="">
+	        		<a lay-href="app/message/" layadmin-event="message">
+	          			<i class="layui-icon layui-icon-notice"></i>
+	          			<!-- 如果有新消息，则显示小圆点 -->
+	          			<script type="text/html" template="" lay-url="./json/message/new.js">
+	          				{{# if(d.data.newmsg){ }} 
+	            			<span class="layui-badge-dot"></span>
+	          				{{# } }}
+	          			</script>    
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="theme">
+	          			<i class="layui-icon layui-icon-theme"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="note">
+	         			<i class="layui-icon layui-icon-note"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item" lay-unselect="">
+	        		<a href="javascript:;" layadmin-event="fullscreen">
+	          			<i class="layui-icon layui-icon-screen-restore"></i>
+	        		</a>
+	      		</li>
+	      		<li class="layui-nav-item">
+	        		<a href="javascript:;">
+                        [[${session.accountName}]]
+	        		</a>
+	        		<dl class="layui-nav-child">
+	          			<dd><a href="changeAccount">切换账号</a></dd>
+	        		</dl>
+	      		</li>
+	    	</ul>
+	  	</div>
+	  
+	  	<div class="layui-side layui-bg-cyan layui-side-menu" style="width: 200px;">
+	    	<div class="layui-side-scroll">
+	      		<ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" >
+			        <li class="layui-nav-item layui-nav-itemed"><a href="javascript:void(0)"><i class="layui-icon layui-icon-home"></i>&nbsp;&nbsp;主页</a></li>
+			        <li class="layui-nav-item">
+			        	<a href="StockReference">
+			        		<i class="fa fa-bar-chart-o fa-fw"></i> 备货参考信息
+			        	</a>
+			        	<dl class="layui-nav-child" id="tabItem">
+				            <dd><a href="javascript:;">各SKU销售详情表</a></dd>
+				            <dd><a href="javascript:;">各尺寸销售详情表</a></dd>
+				            <dd><a href="javascript:;">各颜色销售详情表</a></dd>
+          				</dl>
+			        </li>
+	      		</ul>
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="layui-body" >
+	  		<div class="layui-row layui-col-space30" id="headCard">
+	  			<div class="layui-col-lg3">
+	  				<div class="layui-card">
+	  					<div class="layui-card-header layui-bg-blue layui-row">
+	  						<div class="layui-col-lg4">
+	  							<i class="fa fa-dollar fa-5x"></i>
+	  						</div>
+	  						<div class="layui-col-lg3 layui-col-lg-offset5">
+	  							<div>2522</div>
+	  							<div>本月销售额</div>
+	  						</div>
+	  					</div>
+	  					<div class="layui-card-body">
+	  						<a href="#">查看详细信息<i class="layui-icon layui-icon-right"></i></a>
+	  					</div>
+	  				</div>
+	  			</div>
+	  			<div class="layui-col-lg3">
+	  				<div class="layui-card">
+	  					<div class="layui-card-header  layui-bg-green">
+	  						<div class="layui-col-lg4">
+	  							<i class="fa fa-cube fa-5x"></i>
+	  						</div>
+	  						<div class="layui-col-lg4 layui-col-lg-offset4">
+	  							<div>232</div>
+	  							<div>本月售出商品数</div>
+	  						</div>
+	  					</div>
+	  					<div class="layui-card-body">
+	  						<a href="#">查看详细信息<i class="layui-icon layui-icon-right"></i></a>
+	  					</div>
+	  				</div>
+	  			</div>
+	  			<div class="layui-col-lg3">
+	  				<div class="layui-card">
+	  					<div class="layui-card-header  layui-bg-orange">
+	  						<div class="layui-col-lg4">
+	  							<i class="fa fa-shopping-cart fa-5x"></i>
+	  						</div>
+	  						<div class="layui-col-lg3 layui-col-lg-offset5">
+	  							<div>122</div>
+	  							<div>本月订单数</div>
+	  						</div>
+	  					</div>
+	  					<div class="layui-card-body">
+	  						<a href="#">查看详细信息<i class="layui-icon layui-icon-right"></i></a>
+	  					</div>
+	  				</div>
+	  			</div>
+	  			<div class="layui-col-lg3">
+	  				<div class="layui-card">
+	  					<div class="layui-card-header  layui-bg-red">
+	  						<div class="layui-col-lg4">
+	  							<i class="fa fa-frown-o fa-5x"></i>
+	  						</div>
+	  						<div class="layui-col-lg3 layui-col-lg-offset5">
+	  							<div>12</div>
+	  							<div>本月退货量</div>
+	  						</div>
+	  					</div>
+	  					<div class="layui-card-body">
+	  						<a href="#">查看详细信息<i class="layui-icon layui-icon-right"></i></a>
+	  					</div>
+	  				</div>
+	  			</div>
+	  		</div>
+	  		
+	  		<div class="layui-row layui-col-space30" id="MainContent">
+	  			<div class="layui-col-lg9">
+	  				<div class="layui-card">
+	  					<div class="layui-card-header">
+	  						<i class="fa fa-bar-chart-o fa-fw"></i> 最近三十天销量
+	  					</div>
+	  					<div class="layui-card-body">
+	  						<div class="panel-body" id="thisMonth" style="height:600px;"></div>
+	  					</div>
+	  				</div>
+	  				<div class="layui-card">
+	  					<div class="layui-card-header">
+	  						<i class="fa fa-bar-chart-o fa-fw"></i> 库存状况
+	  					</div>
+	  					<div class="layui-card-body">
+	  						<table class="layui-hide" id="inventory" lay-filter="inventory"></table>
+	  					</div>
+	  				</div>
+	  			</div>
+	  			<div class="layui-col-lg3">
+	  				<div class="layui-card">
+	  					<div class="layui-card-header"><i class="fa fa-bar-chart-o fa-fw"></i> 最近30天每个尺寸售出的数量占比</div>
+	  					<div class="layui-card-body">
+	  						<div id="salesShare" style="height: 300px;"></div>
+	  					</div>
+	  				</div>
+	  			</div>
+	  		</div>	
+	  	</div>
+	  	<div class="layui-footer">
+			© 金麻雀.com
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../layui/layui.js" ></script>
+<script>
+	layui.use(['element','table'],function(){
+		var element = layui.element
+		,table = layui.table;
+		
+		//加载库存表
+		table.render({
+			 elem: '#inventory'
+		    ,url:'http://47.110.139.219:80/inventory'
+		    ,toolbar: '#toolbarDemo'
+    		,title: '库存表'
+		    ,cols: [
+		        [
+		      {field:'asin', title: 'ASIN',align:"center",unresize: true,}
+		      ,{field:'sellerSKU', title: 'SKU',align:"center"}
+		      ,{field:'title', title: '商品名',width:'60%'}
+		      ,{field:'inventoryNum', title: '库存数', sort: true,align:"center"}
+		    ]
+			]
+		    ,page: true
+		    ,limit:10
+		});
+	
+	});
+</script>
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('thisMonth'),'purple-passion');
+var myChart1 = echarts.init(document.getElementById('salesShare'));
+// 指定图表的配置项和数据
+option = {
+    title: {
+        subtext: ''
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['月订单量','月销售额','月商品销售量']
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            /*dataView: {readOnly: true},*/
+            magicType: {type: ['bar']},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    xAxis:  {
+        type: 'category',
+        boundaryGap: false,
+        data: [],
+    },
+    yAxis: {
+        type: 'value',
+    },
+    series: [
+        {
+            name:'月订单量',
+            type:'line',
+            smooth: true,
+            data:[],
+            markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'月销售额',
+            type:'line',
+            smooth: true,
+            data:[],
+            markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'月商品销售量',
+            type:'line',
+            smooth: true,
+            data:[],
+            markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+        },
+    ]
+};
+
+option1 = {
+    title : {
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: []
+    },
+    series : [
+        {
+            name: '售出数量比例',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+myChart.setOption(option);
+myChart1.setOption(option1);
+</script>
+</html>
